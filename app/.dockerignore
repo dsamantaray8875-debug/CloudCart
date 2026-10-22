@@ -1,0 +1,6 @@
+.git/
+*.log
+.env
+.env.*
+*.pem
+*.key
