@@ -12,3 +12,4 @@ app/target/
 # Private keys
 *.pem
 *.key
+terraform/.terraform/
