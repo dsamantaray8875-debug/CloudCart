@@ -6,13 +6,29 @@ metadata:
     app: cloudcart
 spec:
   backoffLimit: 2
+  activeDeadlineSeconds: 120
   template:
     metadata:
       labels:
         app: cloudcart
     spec:
       restartPolicy: Never
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
       containers:
         - name: cloudcart
           image: cloudcart:1.0
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

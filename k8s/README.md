@@ -1,15 +1,29 @@
-# CloudCart Kubernetes Configuration
+# CloudCart Kubernetes Job
 
-This directory contains a Kubernetes Job for the current Java CLI application.
+## Configuration
 
-## Files
-- job.yaml: Runs the CloudCart application as a Job.
-- kustomization.yaml: Groups Kubernetes resources using Kustomize.
+The `job.yaml` file defines a Kubernetes Job for the CloudCart application.
 
-## Important
-The image cloudcart:1.0 must be available to the Kubernetes cluster.
-The image currently exists on the EC2 Docker host only. A separate cluster
-cannot automatically access that local image.
+- Image: `cloudcart:1.0`
+- Restart policy: `Never`
+- Failed Job retry limit: 2
+- Active deadline: 120 seconds
+- CPU request: 100m
+- Memory request: 64Mi
+- CPU limit: 500m
+- Memory limit: 128Mi
 
-These files are configuration only. No Kubernetes resources are deployed
-by creating or committing these files.
+## Security
+
+- Runs as non-root user ID 10001.
+- Disables privilege escalation.
+- Drops all Linux capabilities.
+
+## Important Notes
+
+The Docker image currently exists on the EC2 host. A Kubernetes cluster
+needs access to the image through an image registry or another supported
+image-distribution method.
+
+This configuration has been checked using Python YAML validation.
+It has not been deployed to a Kubernetes cluster.
