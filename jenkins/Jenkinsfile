@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Java Application') {
+            steps {
+                dir('app') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+
+        stage('Test Executable JAR') {
+            steps {
+                dir('app') {
+                    sh 'java -jar target/cloudcart-1.0.0.jar'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t cloudcart:1.0 ./app'
+            }
+        }
+    }
+}
