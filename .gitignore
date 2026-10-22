@@ -1,0 +1,14 @@
+# Maven build output
+app/target/
+
+# Logs
+*.log
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+
+# Private keys
+*.pem
+*.key
