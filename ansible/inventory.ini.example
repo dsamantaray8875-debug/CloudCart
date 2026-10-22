@@ -1,0 +1,3 @@
+[cloudcart_servers]
+# Replace with a server IP or DNS name when configuring a real deployment.
+# cloudcart.example.com ansible_user=ec2-user

@@ -1,0 +1,13 @@
+---
+- name: Verify CloudCart server readiness
+  hosts: cloudcart_servers
+  gather_facts: true
+
+  tasks:
+    - name: Display the target hostname
+      ansible.builtin.debug:
+        msg: "CloudCart target host is {{ inventory_hostname }}"
+
+    - name: Display the operating system
+      ansible.builtin.debug:
+        msg: "Operating system: {{ ansible_distribution }}"
